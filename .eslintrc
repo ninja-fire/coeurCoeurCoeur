@@ -1,0 +1,23 @@
+{
+  "extends" : [
+    "eslint:recommended",
+    "plugin:node/recommended",
+    "plugin:promise/recommended"
+  ],
+  "plugins": [
+    "node",
+    "promise"
+  ],
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "globals" : {},
+  "rules": {
+    "node/no-unsupported-features/es-syntax": "off",
+    "no-console": "off"
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  }
+}

@@ -1,0 +1,109 @@
+$cr: 60px;
+$heartMargin: $cr / 6;
+
+body {
+    margin: 0;
+    color: #fcffee;
+    overflow: hidden;
+    background-color: #222222;
+}
+
+.center {
+    position: absolute;
+    margin: auto;
+    bottom:0; left:0; right:0;
+}
+
+.frame {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    box-shadow: #111111 0 20px 35px -25px inset;
+}
+
+.glow {
+    position: absolute;
+    margin: auto;
+    top: auto; bottom: $cr - $heartMargin; left: calc(-100% - #{$heartMargin}); right:0;
+    width: $heartMargin;
+    height: $heartMargin;
+    transform: translateY(-100%);
+    border-radius: 50%;
+    box-shadow: none;
+}
+
+.half-heart {
+    position: absolute;
+    margin: auto;
+    top: auto; bottom: $cr - $heartMargin; left: calc(-100% - #{$heartMargin}); right:0;
+    width: $cr;
+    height: $cr;
+    background-color: #C72E42;
+    border-radius: 50%;
+    transform: translate(-50%);
+}
+
+.half-heart::after {
+    content: "";
+    position: absolute;
+    top: $cr * 0.4666666667;
+    right: 0;
+    width: 0;
+    height: 0;
+    border: $cr / 2 solid transparent;
+    border-left: 0;
+    border-right: $cr * 0.7 solid #C72E42;
+}
+
+.reflection {
+  left: calc(100% + 40px);
+  transform: rotateY(180deg) translate(-50%);
+}
+
+.join {
+    animation: join 1s forwards;
+}
+
+.to-the-sky {
+    animation: toTheSky 1s forwards;
+}
+
+.halo {
+    animation: toTheSky 1s forwards, halo 1.5s -1s;
+}
+
+@keyframes join {
+    20% {
+        bottom: 40%;
+    }
+    100% {
+        bottom: 40%;
+        left: 0;
+    }
+}
+
+@keyframes toTheSky {
+    0% {
+        bottom: 40%;
+        left: 0;
+    }
+    100% {
+        bottom: calc(100% + (#{$cr} / 2) );
+        left: 0;
+    }
+}
+
+@keyframes halo {
+    40% {
+        box-shadow: none;
+    }
+    41% {
+        box-shadow: white 0 0 $cr * 2.5 $cr / 2;
+    }
+    99% {
+        box-shadow: white 0 0 $cr * 2.5 $cr / 2;
+    }
+    100%{
+        box-shadow: none;
+    }
+}
