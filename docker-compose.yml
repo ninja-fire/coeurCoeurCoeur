@@ -1,0 +1,23 @@
+version: '3.1'
+services:
+  app:
+    build: ./
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '50m'
+        max-file: '10'
+    env_file:
+      - .env
+    command: yarn start
+    ports:
+      - 127.0.0.1:${PORT:-3000}:${PORT:-3000}
+    environment:
+      - VIRTUAL_HOST=${VIRTUAL_HOST:-}
+      - LETSENCRYPT_HOST=${LETSENCRYPT_HOST:-}
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL:-}
+
+networks:
+  default:
+    external:
+      name: webproxy
