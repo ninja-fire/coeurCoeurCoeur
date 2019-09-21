@@ -1,5 +1,6 @@
 import uuidv4 from 'uuid/v4';
 import './main.scss';
+import Config from './config';
 
 function getId(){
 
@@ -14,13 +15,12 @@ function getId(){
 }
 
 const id = getId();
-const apiUrl = 'http://localhost:3000';
 const hearts = document.getElementsByClassName('half-heart two');
 const glows = document.getElementsByClassName('glow');
 
 async function onClickHeart(){
 
-  const res = await fetch(`${apiUrl}/finish`, {
+  const res = await fetch(`${Config.apiUrl}/finish`, {
     method: 'post',
     headers: {
       'Content-type': 'application/json; charset=UTF-8'
@@ -68,7 +68,7 @@ function checkStatus(){
 
   const interval = setInterval(async () => {
 
-    const res = await fetch(`${apiUrl}/giveMe`, {
+    const res = await fetch(`${Config.apiUrl}/giveMe`, {
       method: 'post',
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
@@ -96,7 +96,7 @@ async function start(){
 
   const loversContainers = document.getElementById('lovers');
 
-  const res = await fetch(`${apiUrl}/ready`, {
+  const res = await fetch(`${Config.apiUrl}/ready`, {
     method: 'post',
     headers: {
       'Content-type': 'application/json; charset=UTF-8'
