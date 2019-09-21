@@ -1,6 +1,8 @@
 import uuidv4 from 'uuid/v4';
 import './main.scss';
 import Config from './config';
+import 'materialize-css/dist/css/materialize.min.css';
+import 'materialize-css/dist/js/materialize.min';
 
 function getId(){
 
@@ -14,6 +16,7 @@ function getId(){
 
 }
 
+const url = document.location.href;
 const id = getId();
 const hearts = document.getElementsByClassName('half-heart two');
 const glows = document.getElementsByClassName('glow');
@@ -94,7 +97,35 @@ function checkStatus(){
 
 async function start(){
 
+  const copyBtn = document.getElementById('copy');
   const loversContainers = document.getElementById('lovers');
+
+  let timeOutCopyLink = null;
+
+  copyBtn.addEventListener('click', async () => {
+
+    await navigator.clipboard.writeText(url);
+    copyBtn.innerText = 'Link copied';
+    copyBtn.classList.add('light-green');
+    copyBtn.classList.remove('blue-grey');
+    copyBtn.classList.remove('lighten-4');
+
+    if(timeOutCopyLink){
+
+      clearTimeout(timeOutCopyLink);
+
+    }
+
+    timeOutCopyLink = setTimeout(() => {
+
+      copyBtn.innerText = 'Copy link';
+      copyBtn.classList.add('blue-grey');
+      copyBtn.classList.add('lighten-4');
+      copyBtn.classList.remove('light-green');
+
+    }, 1000);
+
+  }, false);
 
   const res = await fetch(`${Config.apiUrl}/ready`, {
     method: 'post',
