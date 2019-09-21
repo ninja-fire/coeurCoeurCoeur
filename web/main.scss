@@ -64,6 +64,10 @@ body {
     animation: join 1s forwards;
 }
 
+.split {
+    animation: split 1s forwards;
+}
+
 .to-the-sky {
     animation: toTheSky 1s forwards;
 }
@@ -79,6 +83,16 @@ body {
     100% {
         bottom: 40%;
         left: 0;
+    }
+}
+
+@keyframes split {
+    0% {
+        bottom: 40%;
+        left: 0;
+    }
+    100% {
+        bottom: calc(100% + (#{$cr} / 2) );
     }
 }
 
