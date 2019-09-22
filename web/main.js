@@ -38,7 +38,6 @@ async function onClickHeart(){
   if(resContent.result === 'ok'){
 
     console.log('ownership finish');
-    isOwner = false;
     Array.from(hearts).forEach(heart => heart.classList.add('to-the-sky') );
     Array.from(glows).forEach(glow => glow.classList.add('halo') );
 
@@ -49,6 +48,7 @@ async function onClickHeart(){
       Array.from(hearts).forEach(heart => {
         heart.removeEventListener('click', onClickHeart);
       });
+      isOwner = false;
 
     }, 1500);
 
@@ -71,7 +71,7 @@ function moveIt(){
 
 function checkStatus(){
 
-  const interval = setInterval(async () => {
+  setInterval(async () => {
 
     const res = await fetch(`${Config.apiUrl}/giveMe`, {
       method: 'post',
