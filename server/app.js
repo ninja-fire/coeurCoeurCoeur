@@ -5,7 +5,7 @@ const cors = require('cors');
 // const logger = require('morgan');
 
 const port = 3000;
-const timeInactive = 5 * 1000;
+const timeInactive = 60 * 1000;
 let timeoutInactive = null;
 
 // app.use(logger('dev') );
