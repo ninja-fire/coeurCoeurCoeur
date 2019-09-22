@@ -3,6 +3,7 @@ import './main.scss';
 import Config from './config';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
+import Notify from "./notify";
 
 function getId(){
 
@@ -150,8 +151,17 @@ async function start(){
 
   }
 
+  const notify = new Notify();
+  await notify.init();
+
 }
 
 export default () => {
-  start().catch(error => console.error(error) );
+
+  window.addEventListener('load', () => {
+
+    start().catch(error => console.error(error) );
+
+  });
+
 };
