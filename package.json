@@ -21,10 +21,11 @@
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "express": "^4.17.1",
-    "materialize-css": "^1.0.0-rc.2",
+    "materialize-css": "^1.0.0",
     "morgan": "^1.9.1",
-    "sass": "^1.22.12",
     "parcel-bundler": "^1.12.3",
+    "sass": "^1.22.12",
+    "trianglify": "^2.0.0",
     "uuid": "^3.3.3"
   }
 }

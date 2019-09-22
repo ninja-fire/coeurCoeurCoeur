@@ -3,6 +3,7 @@ import './main.scss';
 import Config from './config';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
+import Trianglify from 'trianglify';
 
 function getId(){
 
@@ -142,7 +143,27 @@ function copyLink(){
 
 }
 
+function background(){
+
+  const container = document.getElementById('bg-container');
+
+  const pattern = Trianglify({
+    cell_size: 40,
+    x_colors: 'Greys',
+    y_colors: 'match_x',
+    variance: 1,
+    height: container.clientHeight,
+    width: container.clientWidth,
+    seed: 'dl4fg3',
+    color_space: 'hsv'
+  });
+  pattern.canvas(container);
+
+}
+
 async function start(){
+
+  background();
 
   const res = await fetch(`${Config.apiUrl}/ready`, {
     method: 'post',
