@@ -21,6 +21,7 @@ const url = document.location.href;
 const id = getId();
 const hearts = document.getElementsByClassName('half-heart two');
 const glows = document.getElementsByClassName('glow');
+let isOwner = false;
 
 async function onClickHeart(){
 
@@ -48,7 +49,7 @@ async function onClickHeart(){
       Array.from(hearts).forEach(heart => {
         heart.removeEventListener('click', onClickHeart);
       });
-      checkStatus();
+      isOwner = false;
 
     }, 1500);
 
@@ -58,6 +59,7 @@ async function onClickHeart(){
 
 function moveIt(){
 
+  isOwner = true;
   Array.from(hearts).forEach(heart => {
 
     heart.addEventListener('click', onClickHeart, false);
@@ -70,7 +72,7 @@ function moveIt(){
 
 function checkStatus(){
 
-  const interval = setInterval(async () => {
+  setInterval(async () => {
 
     const res = await fetch(`${Config.apiUrl}/giveMe`, {
       method: 'post',
@@ -83,12 +85,19 @@ function checkStatus(){
 
     const resContent = await res.json();
 
-    if(resContent.result){
+    if(resContent.result && !isOwner){
 
       console.log('get it');
-
-      clearInterval(interval);
       moveIt();
+
+    } else if(!resContent.result && isOwner){
+
+      console.log('Time expired');
+      isOwner = false;
+      Array.from(hearts).forEach(heart => heart.classList.add('split') );
+      Array.from(hearts).forEach(heart => {
+        heart.removeEventListener('click', onClickHeart);
+      });
 
     }
 
@@ -96,13 +105,17 @@ function checkStatus(){
 
 }
 
-async function start(){
+function debug(resContent){
+
+  const loversContainers = document.getElementById('lovers');
+  loversContainers.textContent = JSON.stringify(resContent);
+
+}
+
+function copyLink(){
 
   const copyBtn = document.getElementById('copy');
-  const loversContainers = document.getElementById('lovers');
-
   let timeOutCopyLink = null;
-
   copyBtn.addEventListener('click', async () => {
 
     await navigator.clipboard.writeText(url);
@@ -128,6 +141,10 @@ async function start(){
 
   }, false);
 
+}
+
+async function start(){
+
   const res = await fetch(`${Config.apiUrl}/ready`, {
     method: 'post',
     headers: {
@@ -136,20 +153,18 @@ async function start(){
     mode: 'cors',
     body: JSON.stringify({ id })
   });
-
   const resContent = await res.json();
 
-  loversContainers.textContent = JSON.stringify(resContent);
+  copyLink();
+  debug(resContent);
 
-  if (resContent.coeurOwner !== id) {
-
-    checkStatus();
-
-  } else {
+  if (resContent.coeurOwner === id) {
 
     moveIt();
 
   }
+
+  checkStatus();
 
   const notify = new Notify();
   await notify.init();
