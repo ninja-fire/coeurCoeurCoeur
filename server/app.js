@@ -15,7 +15,6 @@ webPush.setVapidDetails(
 );
 
 const port = 3000;
-const timeInactive = 5 * 1000;
 let timeoutInactive = null;
 
 // app.use(logger('dev') );
@@ -69,7 +68,7 @@ function setNewOwner(id){
 
     }
 
-  }, timeInactive);
+  }, config.timeInactive);
 
 }
 
