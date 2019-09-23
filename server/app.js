@@ -1,24 +1,40 @@
+const webPush = require('web-push');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
+
+const config = require('./config');
+
 // const logger = require('morgan');
 
+webPush.setVapidDetails(
+  config.VAPID.email,
+  config.VAPID.public,
+  config.VAPID.private,
+);
+
 const port = 3000;
-const timeInactive = 60 * 1000;
+const timeInactive = 5 * 1000;
 let timeoutInactive = null;
 
 // app.use(logger('dev') );
 app.use(bodyParser.json() );
 app.use(cors() );
 
-const lovers = new Set();
+const lovers = new Map();
 let coeurOwner = null;
 
 
 function setNewOwner(id){
 
   clearTimeout(timeoutInactive);
+
+  if(lovers.get(id).subscription){
+
+    webPush.sendNotification(lovers.get(id).subscription, Buffer.from(JSON.stringify({ isOwner: true }) ) );
+
+  }
 
   coeurOwner = id;
   console.log(`New owner ${coeurOwner}`);
@@ -32,6 +48,13 @@ function setNewOwner(id){
     }
 
     const newOwner = distribute();
+
+    if(lovers.get(id).subscription){
+
+      webPush.sendNotification(lovers.get(id).subscription, Buffer.from(JSON.stringify({ isOwner: false }) ));
+
+    }
+
     console.log(`Lover escape ${id}`);
     lovers.delete(id);
 
@@ -59,7 +82,7 @@ function distribute(){
   }
 
   const nb = Math.round(Math.random() * (lovers.size -2) );
-  return Array.from(lovers).filter(lover => lover !== coeurOwner)[nb];
+  return Array.from(lovers.keys() ).filter(lover => lover !== coeurOwner)[nb];
 
 }
 
@@ -101,7 +124,7 @@ app.post('/ready', (req, res) => {
   const id = req.body.id;
   const countLovers = lovers.size;
 
-  lovers.add(id);
+  lovers.set(id, {});
 
   if(lovers.size === countLovers){
 
@@ -122,9 +145,23 @@ app.post('/ready', (req, res) => {
 
   res.send({
     result: 'ok',
-    lovers: Array.from(lovers),
+    lovers: Array.from(lovers.keys() ),
     coeurOwner,
   });
+
+});
+
+app.post('/subscribe', (req, res) => {
+
+  const subscription = req.body.subscription;
+
+  if(lovers.has(req.body.id) ){
+
+    lovers.set(req.body.id, { subscription });
+
+  }
+
+  res.send({ result: 'ok' });
 
 });
 

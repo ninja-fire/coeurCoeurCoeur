@@ -1,24 +1,12 @@
-import uuidv4 from 'uuid/v4';
 import './main.scss';
 import Config from './config';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
-import Notify from "./notify";
-
-function getId(){
-
-  if (localStorage.getItem('id') === null) {
-
-    localStorage.setItem('id', uuidv4());
-
-  }
-
-  return localStorage.getItem('id');
-
-}
+import Notify from './notify';
+import Connector from './connectors';
 
 const url = document.location.href;
-const id = getId();
+const id = Connector.getId();
 const hearts = document.getElementsByClassName('half-heart two');
 const glows = document.getElementsByClassName('glow');
 let isOwner = false;
@@ -101,7 +89,7 @@ function checkStatus(){
 
     }
 
-  }, 1000);
+  }, 10 * 1000);
 
 }
 
@@ -112,7 +100,7 @@ function debug(resContent){
 
 }
 
-function copyLink(){
+function copyLink(notify){
 
   const copyBtn = document.getElementById('copy');
   let timeOutCopyLink = null;
@@ -123,6 +111,8 @@ function copyLink(){
     copyBtn.classList.add('light-green');
     copyBtn.classList.remove('blue-grey');
     copyBtn.classList.remove('lighten-4');
+
+    await notify.send({ body: 'text copied' });
 
     if(timeOutCopyLink){
 
@@ -155,7 +145,6 @@ async function start(){
   });
   const resContent = await res.json();
 
-  copyLink();
   debug(resContent);
 
   if (resContent.coeurOwner === id) {
@@ -168,15 +157,12 @@ async function start(){
 
   const notify = new Notify();
   await notify.init();
+  copyLink(notify);
 
 }
 
 export default () => {
 
-  window.addEventListener('load', () => {
-
-    start().catch(error => console.error(error) );
-
-  });
+  start().catch(error => console.error(error) );
 
 };
