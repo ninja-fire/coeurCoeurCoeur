@@ -5,6 +5,7 @@ export default class Notify {
 
     this.permissionGranted = false;
     this.workerLoaded = false;
+    this.registration = null;
     this.notifyContainer = document.getElementById('notify-container');
     this.notifyBtn = document.getElementById('notify');
 
@@ -20,7 +21,7 @@ export default class Notify {
 
     }
 
-    await this.registerServiceWorker();
+    this.registration = await this.registerServiceWorker();
 
     if (Notification.permission === 'denied') {
 
@@ -33,7 +34,7 @@ export default class Notify {
       this.notifyContainer.style.display = 'block';
       this.listenEnable();
 
-    } else if(Notification.permission === 'allow'){
+    } else if(Notification.permission === 'granted'){
 
       this.permissionGranted = true;
 
@@ -43,7 +44,7 @@ export default class Notify {
 
   registerServiceWorker() {
 
-    navigator.serviceWorker.register('service-worker.js')
+    return navigator.serviceWorker.register('service-worker.js')
       .then( (registration) => {
         console.log('Service worker successfully registered.');
         this.workerLoaded = true;
@@ -65,6 +66,7 @@ export default class Notify {
 
         this.permissionGranted = true;
         this.notifyContainer.style.display = 'none';
+        await this.send({ body: 'Notification enable :)' });
 
       } else {
 
@@ -73,6 +75,21 @@ export default class Notify {
       }
 
     }, false);
+
+  }
+
+  async send({ title = 'Coeur coeur coeur', body = '' }){
+
+    if(this.workerLoaded && this.registration && this.permissionGranted){
+
+      await this.registration.showNotification(title, { body });
+
+      return true;
+
+    }
+
+    return false;
+
   }
 
 }
