@@ -4,14 +4,14 @@ const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
 
-const config = require('./config');
+const Config = require('./config');
 
 // const logger = require('morgan');
 
 webPush.setVapidDetails(
-  config.VAPID.email,
-  config.VAPID.public,
-  config.VAPID.private,
+  Config.VAPID.email,
+  Config.VAPID.public,
+  Config.VAPID.private,
 );
 
 const port = 3000;
@@ -68,7 +68,7 @@ function setNewOwner(id){
 
     }
 
-  }, config.timeInactive);
+  }, Config.timeInactive);
 
 }
 

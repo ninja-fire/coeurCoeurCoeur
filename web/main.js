@@ -89,7 +89,7 @@ function checkStatus(){
 
     }
 
-  }, 10 * 1000);
+  }, Config.checkStatusInterval);
 
 }
 
