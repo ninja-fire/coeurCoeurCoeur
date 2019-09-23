@@ -4,6 +4,7 @@ export default class Notify {
   constructor(){
 
     this.permissionGranted = false;
+    this.workerLoaded = false;
     this.notifyContainer = document.getElementById('notify-container');
     this.notifyBtn = document.getElementById('notify');
 
@@ -11,43 +12,32 @@ export default class Notify {
 
   async init(){
 
-    if (!('serviceWorker' in navigator)) {
+    if (!window.PushManager || !navigator.serviceWorker || !Notification) {
 
-      this.notifyBtn.classList.add('disable');
-      return console.error('service worker not supported');
-
-    }
-
-    if (!('PushManager' in window)) {
-
-      this.notifyBtn.classList.add('disable');
-      return console.error('Push manager not supported');
-
-    }
-
-    if (!Notification) {
-
-      this.notifyBtn.classList.add('disable');
+      this.notifyContainer.style.display = 'block';
+      this.notifyBtn.classList.add('disabled');
       return console.error('Notification not supported');
 
     }
 
     await this.registerServiceWorker();
 
-
     if (Notification.permission === 'denied') {
 
-      this.notifyBtn.classList.add('disable');
+      this.notifyContainer.style.display = 'block';
+      this.notifyBtn.classList.add('disabled');
       return console.error('Notification blocked');
 
-    }
+    } else if(Notification.permission === 'default'){
 
-    // if(){
-    //
-    //   this.listenEnable();
-    //
-    // }
-    debugger;
+      this.notifyContainer.style.display = 'block';
+      this.listenEnable();
+
+    } else if(Notification.permission === 'allow'){
+
+      this.permissionGranted = true;
+
+    }
 
   }
 
@@ -74,6 +64,11 @@ export default class Notify {
       if(permissionResult === 'granted'){
 
         this.permissionGranted = true;
+        this.notifyContainer.style.display = 'none';
+
+      } else {
+
+        this.notifyBtn.classList.add('disabled');
 
       }
 
