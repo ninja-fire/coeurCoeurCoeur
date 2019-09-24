@@ -10,6 +10,7 @@ const id = Connector.getId();
 const hearts = document.getElementsByClassName('half-heart two');
 const glows = document.getElementsByClassName('glow');
 let isOwner = false;
+let timeoutClickHeart = null;
 
 async function onClickHeart(){
 
@@ -31,7 +32,7 @@ async function onClickHeart(){
     Array.from(hearts).forEach(heart => heart.classList.add('to-the-sky') );
     Array.from(glows).forEach(glow => glow.classList.add('halo') );
 
-    setTimeout(() => {
+    timeoutClickHeart = setTimeout(() => {
 
       Array.from(hearts).forEach(heart => heart.classList.remove('join', 'to-the-sky') );
       Array.from(glows).forEach(glow => glow.classList.remove('halo') );
@@ -48,6 +49,18 @@ async function onClickHeart(){
 function moveIt(){
 
   isOwner = true;
+  Array.from(hearts).forEach(heart => {
+    heart.removeEventListener('click', onClickHeart);
+  });
+  Array.from(hearts).forEach(heart => heart.classList.remove('join', 'to-the-sky') );
+  Array.from(glows).forEach(glow => glow.classList.remove('halo') );
+
+  if(timeoutClickHeart){
+
+    clearTimeout(timeoutClickHeart);
+
+  }
+
   Array.from(hearts).forEach(heart => {
 
     heart.addEventListener('click', onClickHeart, false);
