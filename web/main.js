@@ -23,6 +23,7 @@ async function onClickHeart(){
   });
 
   const resContent = await res.json();
+  isOwner = false;
 
   if(resContent.result === 'ok'){
 
@@ -37,7 +38,6 @@ async function onClickHeart(){
       Array.from(hearts).forEach(heart => {
         heart.removeEventListener('click', onClickHeart);
       });
-      isOwner = false;
 
     }, 1500);
 
