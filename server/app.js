@@ -31,7 +31,20 @@ function setNewOwner(id){
 
   if(lovers.get(id).subscription){
 
-    webPush.sendNotification(lovers.get(id).subscription, Buffer.from(JSON.stringify({ isOwner: true }) ) );
+    webPush.sendNotification(lovers.get(id).subscription, Buffer.from(JSON.stringify({ isOwner: true }) ) )
+      .catch( (error) => {
+
+        if(error.statusCode === 410){
+
+          lovers.set(id, {}); // todo maybe select new one ?
+
+        } else {
+
+          console.error('Subscription push error ', error);
+
+        }
+
+      });
 
   }
 
@@ -50,7 +63,16 @@ function setNewOwner(id){
 
     if(lovers.get(id).subscription){
 
-      webPush.sendNotification(lovers.get(id).subscription, Buffer.from(JSON.stringify({ isOwner: false }) ));
+      webPush.sendNotification(lovers.get(id).subscription, Buffer.from(JSON.stringify({ isOwner: false }) ))
+        .catch( (error) => {
+
+          if(error.statusCode !== 410){
+
+            console.log('Subscription push error ', error);
+
+          }
+
+        });
 
     }
 
