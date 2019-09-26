@@ -14,6 +14,19 @@ let timeoutClickHeart = null;
 
 async function onClickHeart(){
 
+  Array.from(hearts).forEach(heart => {
+    heart.classList.add('to-the-sky');
+    heart.removeEventListener('click', onClickHeart);
+  });
+  Array.from(glows).forEach(glow => glow.classList.add('halo') );
+
+  timeoutClickHeart = setTimeout(() => {
+
+    Array.from(hearts).forEach(heart => heart.classList.remove('join', 'to-the-sky') );
+    Array.from(glows).forEach(glow => glow.classList.remove('halo') );
+
+  }, 1500);
+
   const res = await fetch(`${Config.apiUrl}/finish`, {
     method: 'post',
     headers: {
@@ -29,18 +42,10 @@ async function onClickHeart(){
   if(resContent.result === 'ok'){
 
     console.log('ownership finish');
-    Array.from(hearts).forEach(heart => heart.classList.add('to-the-sky') );
-    Array.from(glows).forEach(glow => glow.classList.add('halo') );
 
-    timeoutClickHeart = setTimeout(() => {
+  } else {
 
-      Array.from(hearts).forEach(heart => heart.classList.remove('join', 'to-the-sky') );
-      Array.from(glows).forEach(glow => glow.classList.remove('halo') );
-      Array.from(hearts).forEach(heart => {
-        heart.removeEventListener('click', onClickHeart);
-      });
-
-    }, 1500);
+    console.error('Cannot finish ownership', resContent);
 
   }
 
