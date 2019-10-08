@@ -17,6 +17,7 @@ function getId(){
 }
 
 const url = document.location.href;
+const shareButton = document.getElementById('share-button');
 const id = getId();
 const hearts = document.getElementsByClassName('half-heart two');
 const glows = document.getElementsByClassName('glow');
@@ -142,7 +143,26 @@ function copyLink(){
 
 }
 
+// function displayShare(){}
+
+
 async function start(){
+
+  if(navigator.share){
+    document.getElementById("share-button").style.display = "initial";
+  }
+  shareButton.addEventListener("click", async () => {
+    try {
+      await navigator.share({
+        title: 'title',
+        text: 'share love with',
+        url: '',
+      });
+      console.log("Data was shared successfully");
+    } catch (err) {
+      console.error("Share failed:", err.message);
+    }
+  });
 
   const res = await fetch(`${Config.apiUrl}/ready`, {
     method: 'post',
