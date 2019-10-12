@@ -152,26 +152,26 @@ function copyLink(notify){
 
 }
 
-// function displayShare(){}
+function displayShare(){
+  if(navigator.share){
+    document.getElementById("share-button").style.display = "initial";
+    shareButton.addEventListener("click", async () => {
+      try {
+        await navigator.share({
+          title: 'title',
+          text: 'share love with',
+          url: '',
+        });
+        console.log("Data was shared successfully");
+      } catch (err) {
+        console.error("Share failed:", err.message);
+      }
+    });
+  }
+}
 
 
 async function start(){
-
-  if(navigator.share){
-    document.getElementById("share-button").style.display = "initial";
-  }
-  shareButton.addEventListener("click", async () => {
-    try {
-      await navigator.share({
-        title: 'title',
-        text: 'share love with',
-        url: '',
-      });
-      console.log("Data was shared successfully");
-    } catch (err) {
-      console.error("Share failed:", err.message);
-    }
-  });
 
   const res = await fetch(`${Config.apiUrl}/ready`, {
     method: 'post',
@@ -196,6 +196,7 @@ async function start(){
   const notify = new Notify();
   await notify.init();
   copyLink(notify);
+  displayShare();
 
 }
 
