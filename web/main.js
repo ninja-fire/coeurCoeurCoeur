@@ -1,28 +1,31 @@
-import uuidv4 from 'uuid/v4';
 import './main.scss';
 import Config from './config';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
-
-function getId(){
-
-  if (localStorage.getItem('id') === null) {
-
-    localStorage.setItem('id', uuidv4());
-
-  }
-
-  return localStorage.getItem('id');
-
-}
+import Notify from './notify';
+import Connector from './connectors';
 
 const url = document.location.href;
-const id = getId();
+const id = Connector.getId();
 const hearts = document.getElementsByClassName('half-heart two');
 const glows = document.getElementsByClassName('glow');
 let isOwner = false;
+let timeoutClickHeart = null;
 
 async function onClickHeart(){
+
+  Array.from(hearts).forEach(heart => {
+    heart.classList.add('to-the-sky');
+    heart.removeEventListener('click', onClickHeart);
+  });
+  Array.from(glows).forEach(glow => glow.classList.add('halo') );
+
+  timeoutClickHeart = setTimeout(() => {
+
+    Array.from(hearts).forEach(heart => heart.classList.remove('join', 'to-the-sky') );
+    Array.from(glows).forEach(glow => glow.classList.remove('halo') );
+
+  }, 1500);
 
   const res = await fetch(`${Config.apiUrl}/finish`, {
     method: 'post',
@@ -34,23 +37,15 @@ async function onClickHeart(){
   });
 
   const resContent = await res.json();
+  isOwner = false;
 
   if(resContent.result === 'ok'){
 
     console.log('ownership finish');
-    Array.from(hearts).forEach(heart => heart.classList.add('to-the-sky') );
-    Array.from(glows).forEach(glow => glow.classList.add('halo') );
 
-    setTimeout(() => {
+  } else {
 
-      Array.from(hearts).forEach(heart => heart.classList.remove('join', 'to-the-sky') );
-      Array.from(glows).forEach(glow => glow.classList.remove('halo') );
-      Array.from(hearts).forEach(heart => {
-        heart.removeEventListener('click', onClickHeart);
-      });
-      isOwner = false;
-
-    }, 1500);
+    console.error('Cannot finish ownership', resContent);
 
   }
 
@@ -59,6 +54,18 @@ async function onClickHeart(){
 function moveIt(){
 
   isOwner = true;
+  Array.from(hearts).forEach(heart => {
+    heart.removeEventListener('click', onClickHeart);
+  });
+  Array.from(hearts).forEach(heart => heart.classList.remove('join', 'to-the-sky') );
+  Array.from(glows).forEach(glow => glow.classList.remove('halo') );
+
+  if(timeoutClickHeart){
+
+    clearTimeout(timeoutClickHeart);
+
+  }
+
   Array.from(hearts).forEach(heart => {
 
     heart.addEventListener('click', onClickHeart, false);
@@ -100,7 +107,7 @@ function checkStatus(){
 
     }
 
-  }, 1000);
+  }, Config.checkStatusInterval);
 
 }
 
@@ -111,7 +118,7 @@ function debug(resContent){
 
 }
 
-function copyLink(){
+function copyLink(notify){
 
   const copyBtn = document.getElementById('copy');
   let timeOutCopyLink = null;
@@ -122,6 +129,8 @@ function copyLink(){
     copyBtn.classList.add('light-green');
     copyBtn.classList.remove('blue-grey');
     copyBtn.classList.remove('lighten-4');
+
+    await notify.send({ body: 'text copied' });
 
     if(timeOutCopyLink){
 
@@ -154,7 +163,6 @@ async function start(){
   });
   const resContent = await res.json();
 
-  copyLink();
   debug(resContent);
 
   if (resContent.coeurOwner === id) {
@@ -165,8 +173,14 @@ async function start(){
 
   checkStatus();
 
+  const notify = new Notify();
+  await notify.init();
+  copyLink(notify);
+
 }
 
 export default () => {
+
   start().catch(error => console.error(error) );
+
 };
