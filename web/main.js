@@ -6,6 +6,7 @@ import Notify from './notify';
 import Connector from './connectors';
 
 const url = document.location.href;
+const shareButton = document.getElementById('share-button');
 const id = Connector.getId();
 const hearts = document.getElementsByClassName('half-heart two');
 const glows = document.getElementsByClassName('glow');
@@ -151,6 +152,25 @@ function copyLink(notify){
 
 }
 
+function displayShare(){
+  if(navigator.share){
+    document.getElementById("share-button").style.display = "initial";
+    shareButton.addEventListener("click", async () => {
+      try {
+        await navigator.share({
+          title: 'title',
+          text: 'share love with',
+          url: '',
+        });
+        console.log("Data was shared successfully");
+      } catch (err) {
+        console.error("Share failed:", err.message);
+      }
+    });
+  }
+}
+
+
 async function start(){
 
   const res = await fetch(`${Config.apiUrl}/ready`, {
@@ -176,6 +196,7 @@ async function start(){
   const notify = new Notify();
   await notify.init();
   copyLink(notify);
+  displayShare();
 
 }
 
