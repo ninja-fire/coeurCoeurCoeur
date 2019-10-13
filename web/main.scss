@@ -16,44 +16,45 @@ body {
   width: 100%;
   background: linear-gradient(151.36deg, #FF8A8A 20.34%, rgba(237, 241, 36, 0.86) 100%) no-repeat;
 
-  #copy-container {
-    text-align: center;
+  #notify-container {
+    display: none;
+    bottom: 20%;
+    width: 100%;
+    position: absolute;
+    justify-content: center;
+  }
+
+  #link-container {
+
     bottom: 10%;
     position: absolute;
     width: 100%;
-  }
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 
-  #notify-container {
-    display: none;
-  }
+    #copy-container {}
 
-  #github-icon {
-    bottom: 1%;
-    position: absolute;
-    width: 100%;
-
-    img {
-      width: 35px;
-      height: 35px;
+    #share-button {
+      display: none;
     }
+
   }
 
-  #share-button {
-    text-align: center;
-    bottom: 20%;
-    position: center;
-    width: 100%;
-    display: none;
-  }
-
-  #github-icon {
+  #source-container {
     bottom: 1%;
     position: absolute;
     width: 100%;
+    display: flex;
+    justify-content: center;
 
-    img {
-      width: 35px;
-      height: 35px;
+    #github-icon {
+
+      img {
+        width: 35px;
+        height: 35px;
+      }
+
     }
 
   }
