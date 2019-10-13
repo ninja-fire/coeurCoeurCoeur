@@ -1,52 +1,136 @@
 $cr: 60px;
 $heartMargin: $cr / 6;
 
-body {
+* {
     margin: 0;
-    color: #fcffee;
-    overflow: hidden;
 }
 
-#main-container {
+body {
+    color: white;
+    overflow: hidden;
+    background: linear-gradient(151.36deg, #FF8A8A 20.34%, rgba(237, 241, 36, 0.86) 100%) no-repeat;
+}
 
+.main-container {
     display: flex;
     flex-direction: column;
-    z-index: 1;
-    background: linear-gradient(151.36deg, #FF8A8A 20.34%, rgba(237, 241, 36, 0.86) 100%) no-repeat;
+    min-height: 100vh;
+}
 
-    #copy-container {
-        text-align: center;
-        bottom: 10%;
-        position: absolute;
-        width: 100%;
-    }
+.box {
+    width: 60%;
+    height: 20%;
+    left: 36px;
+    top: 118px;
+    text-align: center;
+    padding: 3% 3% 3% 2%;
 
-    #notify-container {
-        display: none;
-    }
+    background: rgba(255, 255, 255, 0.64);
+    box-shadow: inset 0px 4px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+}
 
-    #github-icon {
-        bottom: 1%;
-        position: absolute;
-        width: 100%;
+.waiting-text {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 16px;
+    text-align: center;
 
-        img {
-            width: 35px;
-            height: 35px;
-        }
-    }
-
-    #share-button {
-        text-align: center;
-        bottom: 20%;
-        position: center;
-        width: 100%;
-        display: none;
-    }
+    color: #0F5353;
 
 }
 
-#hear-container{
+.page-header {
+    display: flex;
+}
+
+.page-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.page-footer {
+    display: flex;
+    flex-direction: column-reverse;
+    padding-top-: 0%;
+}
+
+.button {
+    width: 121px;
+    height: 40px;
+    padding: 1%;
+
+    background: #F4F4F4;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+}
+
+.text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding-left: 2%;
+
+}
+
+#github-icon {
+    bottom: 50%;
+    width: 100%;
+
+    img {
+        width: 35px;
+        height: 35px;
+        }
+}
+
+
+//#main-container {
+//
+//    display: flex;
+//    flex-direction: column;
+//    z-index: 1;
+//    min-height: 100vh;
+//    background: linear-gradient(151.36deg, #FF8A8A 20.34%, rgba(237, 241, 36, 0.86) 100%) no-repeat;
+//
+//    #copy-container {
+//        text-align: center;
+//        bottom: 10%;
+//        position: absolute;
+//        width: 100%;
+//    }
+//
+//    #notify-container {
+//        display: none;
+//    }
+//
+//    #github-icon {
+//        bottom: 1%;
+//        position: absolute;
+//        width: 100%;
+//
+//        img {
+//            width: 35px;
+//            height: 35px;
+//        }
+//    }
+//
+//    #share-button {
+//        text-align: center;
+//        bottom: 20%;
+//        position: center;
+//        width: 100%;
+//        display: none;
+//    }
+//
+//}
+
+#heart-container{
     position: absolute;
     margin: auto;
     bottom:0; left:0; right:0;
