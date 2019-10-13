@@ -32,7 +32,7 @@ export default class Notify {
 
     if (!window.PushManager || !navigator.serviceWorker || !Notification) {
 
-      this.notifyContainer.style.display = 'block';
+      this.notifyContainer.style.display = 'flex';
       this.notifyBtn.classList.add('disabled');
       return console.error('Notification not supported');
 
@@ -42,13 +42,13 @@ export default class Notify {
 
     if (Notification.permission === 'denied') {
 
-      this.notifyContainer.style.display = 'block';
+      this.notifyContainer.style.display = 'flex';
       this.notifyBtn.classList.add('disabled');
       return console.error('Notification blocked');
 
     } else if(Notification.permission === 'default'){
 
-      this.notifyContainer.style.display = 'block';
+      this.notifyContainer.style.display = 'flex';
       this.listenEnable();
 
     } else if(Notification.permission === 'granted'){

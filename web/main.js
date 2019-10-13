@@ -114,7 +114,7 @@ function checkStatus(){
 
 function debug(resContent){
 
-  const loversContainers = document.getElementById('lovers');
+  const loversContainers = document.getElementById('debug');
   loversContainers.textContent = JSON.stringify(resContent);
 
 }

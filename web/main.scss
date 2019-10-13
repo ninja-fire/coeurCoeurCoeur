@@ -2,48 +2,109 @@ $cr: 60px;
 $heartMargin: $cr / 6;
 
 body {
-    margin: 0;
-    color: #fcffee;
-    overflow: hidden;
-    background-color: #222222;
+  margin: 0;
+  color: #fcffee;
+  overflow: hidden;
 }
 
-.center {
-    position: absolute;
-    margin: auto;
-    bottom:0; left:0; right:0;
-}
+#main-container {
 
-.frame {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(151.36deg, #FF8A8A 20.34%, rgba(237, 241, 36, 0.86) 100%) no-repeat;
+
+  #notify-container {
+    display: none;
+    bottom: 20%;
     width: 100%;
-    height: 100%;
-    overflow: hidden;
-    box-shadow: #111111 0 20px 35px -25px inset;
+    position: absolute;
+    justify-content: center;
+  }
+
+  #link-container {
+
+    bottom: 10%;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    #copy-container {}
+
+    #share-button {
+      display: none;
+    }
+
+  }
+
+  #source-container {
+    bottom: 1%;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    #github-icon {
+
+      img {
+        width: 35px;
+        height: 35px;
+      }
+
+    }
+
+  }
+
 }
 
-.glow {
+#hear-container {
+  position: absolute;
+  margin: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-shadow: #111111 0 20px 35px -25px inset;
+
+  div {
+    z-index: 1;
+  }
+
+  .glow {
     position: absolute;
     margin: auto;
-    top: auto; bottom: $cr - $heartMargin; left: calc(-100% - #{$heartMargin}); right:0;
+    top: auto;
+    bottom: $cr - $heartMargin;
+    left: calc(-100% - #{$heartMargin});
+    right: 0;
     width: $heartMargin;
     height: $heartMargin;
     transform: translateY(-100%);
     border-radius: 50%;
     box-shadow: none;
-}
+  }
 
-.half-heart {
+  .half-heart {
     position: absolute;
     margin: auto;
-    top: auto; bottom: $cr - $heartMargin; left: calc(-100% - #{$heartMargin}); right:0;
+    top: auto;
+    bottom: $cr - $heartMargin;
+    left: calc(-100% - #{$heartMargin});
+    right: 0;
     width: $cr;
     height: $cr;
     background-color: #C72E42;
     border-radius: 50%;
     transform: translate(-50%);
-}
+  }
 
-.half-heart::after {
+  .half-heart::after {
     content: "";
     position: absolute;
     top: $cr * 0.4666666667;
@@ -53,101 +114,73 @@ body {
     border: $cr / 2 solid transparent;
     border-left: 0;
     border-right: $cr * 0.7 solid #C72E42;
-}
+  }
 
-.reflection {
+  .reflection {
     left: calc(100% + 40px);
     transform: rotateY(180deg) translate(-50%);
-}
+  }
 
-.join {
+  .join {
     animation: join 1s forwards;
-}
+  }
 
-.split {
+  .split {
     animation: split 1s forwards;
-}
+  }
 
-.to-the-sky {
+  .to-the-sky {
     animation: toTheSky 1s forwards;
-}
+  }
 
-.halo {
+  .halo {
     animation: toTheSky 1s forwards, halo 1.5s -1s;
-}
+  }
 
-@keyframes join {
+  @keyframes join {
     20% {
-        bottom: 40%;
+      bottom: 40%;
     }
     100% {
-        bottom: 40%;
-        left: 0;
+      bottom: 40%;
+      left: 0;
     }
-}
+  }
 
-@keyframes split {
+  @keyframes split {
     0% {
-        bottom: 40%;
-        left: 0;
+      bottom: 40%;
+      left: 0;
     }
     100% {
-        bottom: calc(100% + (#{$cr} / 2) );
+      bottom: calc(100% + (#{$cr} / 2));
     }
-}
+  }
 
-@keyframes toTheSky {
+  @keyframes toTheSky {
     0% {
-        bottom: 40%;
-        left: 0;
+      bottom: 40%;
+      left: 0;
     }
     100% {
-        bottom: calc(100% + (#{$cr} / 2) );
-        left: 0;
+      bottom: calc(100% + (#{$cr} / 2));
+      left: 0;
     }
-}
+  }
 
-@keyframes halo {
+  @keyframes halo {
     40% {
-        box-shadow: none;
+      box-shadow: none;
     }
     41% {
-        box-shadow: white 0 0 $cr * 2.5 $cr / 2;
+      box-shadow: white 0 0 $cr * 2.5 $cr / 2;
     }
     99% {
-        box-shadow: white 0 0 $cr * 2.5 $cr / 2;
+      box-shadow: white 0 0 $cr * 2.5 $cr / 2;
     }
-    100%{
-        box-shadow: none;
+    100% {
+      box-shadow: none;
     }
-}
+  }
 
-#copy-container {
-    text-align: center;
-    bottom: 10%;
-    position: absolute;
-    width: 100%;
-}
-
-#notify-container {
-  display: none;
-}
-
-#github-icon {
-    bottom: 1%;
-    position: absolute;
-    width: 100%;
-
-    img {
-        width: 35px;
-        height: 35px;
-    }
-}
-
-#share-button {
-  text-align: center;
-  bottom: 20%;
-  position: center;
-  width: 100%;
-  display: none;
 }
