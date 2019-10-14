@@ -9,40 +9,47 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="shortcut icon" href="assets/favicon.png">
 </head>
+
 <body>
-<div id="hear-container">
+<div id="heart-container">
   <div class="glow"></div>
   <div class="half-heart"></div>
   <div class="glow two"></div>
   <div class="half-heart two"></div>
   <div class="half-heart reflection two"></div>
 </div>
-<div id="main-container">
+<main id="main-container">
   <div id="debug"></div>
-  <div id="info-container">
-    Beaucoup d’amour est actuelllement en cours de distribution. Prépare toi à en envoyer à ton tour !
+  <div id="info-container" class="box">
+    <img src="assets/wait-icon.svg" alt="wait-icon">
+    <p class="info-text">
+      Beaucoup d’amour est actuellement en cours de distribution. Prépare toi à en envoyer à ton tour !
+    </p>
   </div>
   <div id="notify-container">
     <div>
-      <a id="notify" class="waves-effect btn blue-grey lighten-4 blue-grey-text text-darken-4">Notify</a>
+      <a id="notify" class="button text">Notify</a>
     </div>
+  </div>
+  <div id="waiting-heart">
+    <img src="assets/waiting-heart.svg" alt="waiting heart">
   </div>
   <div id="link-container">
     <div id="copy-container">
-      <a id="copy" class="waves-effect btn blue-grey lighten-4 blue-grey-text text-darken-4">Copy link</a>
+      <a id="copy" class="button text">Copy link</a>
     </div>
-    <div id="share-button">
-      <button> BOUTON </button>
+    <div id="share-button" class="button text">
+      <a> SHARE </a>
     </div>
   </div>
-  <div id="source-container">
+  <footer id="footer-container">
     <div id="github-icon">
       <a href="https://github.com/ninja-fire/coeurCoeurCoeur" target="_blank">
         <img src="assets/github-logo.svg" alt="github link">
       </a>
     </div>
-  </div>
-</div>
+  </footer>
+</main>
 <script src="./index.js"></script>
 </body>
 </html>
