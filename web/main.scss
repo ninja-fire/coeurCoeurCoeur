@@ -12,11 +12,9 @@ body {
 
   display: flex;
   flex-direction: column;
-  //justify-content: space-around;
   position: absolute;
   height: 100%;
   width: 100%;
-  //min-height: 100vh;
   background: linear-gradient(151.36deg, #FF8A8A 20.34%, rgba(237, 241, 36, 0.86) 100%) no-repeat;
 
   #info-container {
@@ -35,13 +33,23 @@ body {
 
   #notify-container {
     display: none;
-    bottom: 20%;
+    bottom: 65%;
     width: 100%;
     position: absolute;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 
     a {
       color: #FAB681;
+      span {
+        padding-right: 10px;
+      }
+    }
+
+    p {
+      font-weight: 100;
+      font-size: 120%;
     }
 
   }
@@ -55,18 +63,30 @@ body {
     flex-direction: row;
     justify-content: center;
 
+    div {
+      margin: 2%;
+    }
+
     #copy-container{
 
       display: flex;
+
       #copy {
         color: #F6D067;
       }
 
+      span {
+        padding-left: 10px;
+      }
     }
 
     #share-button {
-      //display: none;
+      //display: none; TODO enable
       color: #F4DB5B;
+
+      span {
+        padding-right: 10px;
+      }
     }
 
   }
@@ -117,21 +137,28 @@ body {
   }
 
   .button {
-    width: 120px;
-    height: 40px;
-    padding: 1%;
+    width: 130px;
     background: #F4F4F4;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 40px;
     display: flex;
     align-items: center;
+    padding: 10px 10px;
   }
 
   .text {
-    font-size: 100%;
+    font-size: 110%;
     text-align: center;
-    font-weight: 300;
+    font-weight: 400;
 
+    span {
+      margin: 0 auto;
+    }
+
+    img {
+      height: 30px;
+      width: 30px;
+    }
   }
 
 }
