@@ -1,3 +1,5 @@
+figma: https://www.figma.com/file/gOuYAsMnOObaFvK4xAsdii/coeurcoeurcoeur
+
 faire les notifications
 => bouton "recevoir les notifications"
 
