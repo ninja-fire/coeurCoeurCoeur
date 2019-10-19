@@ -1,7 +1,5 @@
 import './main.scss';
 import Config from './config';
-import 'materialize-css/dist/css/materialize.min.css';
-import 'materialize-css/dist/js/materialize.min';
 import Notify from './notify';
 import Connector from './connectors';
 
