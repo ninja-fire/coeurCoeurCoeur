@@ -1,6 +1,3 @@
-$cr: 60px;
-$heartMargin: $cr / 6;
-
 body {
   margin: 0;
   color: #fcffee;
@@ -17,25 +14,31 @@ body {
   width: 100%;
   background: linear-gradient(151.36deg, #FF8A8A 20.34%, rgba(237, 241, 36, 0.86) 100%) no-repeat;
 
+  #debug {
+
+    position: absolute;
+
+  }
+
   #info-container {
 
-    width: 80%;
-    height: 20%;
-    margin: 0 auto;
+    margin: 5% 10% 0 10%;
+    display: flex;
+    align-items: center;
 
     img {
-      height: 90%;
-      width: 10vw;
+      width: 10%;
       margin: 0 3% 0 0;
     }
 
+    p {
+      width: 90%;
+    }
   }
 
   #notify-container {
     display: none;
-    bottom: 65%;
-    width: 100%;
-    position: absolute;
+    margin: 2% 2% 0 2%;
     justify-content: center;
     flex-direction: column;
     align-items: center;
@@ -64,6 +67,7 @@ body {
     p {
       font-weight: 100;
       font-size: 120%;
+      text-align: center;
     }
 
   }
@@ -79,29 +83,24 @@ body {
 
     div {
       margin: 2%;
+      display: flex;
     }
 
-    #copy-container{
+    #copy-button{
 
-      display: flex;
+      color: #F6D067;
+      .button-text {
+        padding-left: 10px;
+      }
 
-      #copy-button{
+      .button-image {
+        background-image: url("assets/copylink.svg");
+      }
 
-        color: #F6D067;
-        .button-text {
-          padding-left: 10px;
-        }
+      &:active, &:hover {
 
         .button-image {
-          background-image: url("assets/copylink.svg");
-        }
-
-        &:active, &:hover {
-
-          .button-image {
-            background-image: url("assets/copylink-active.svg");
-          }
-
+          background-image: url("assets/copylink-active.svg");
         }
 
       }
@@ -109,7 +108,7 @@ body {
     }
 
     #share-button {
-      //display: none; TODO enable
+      display: none;
       color: #F4DB5B;
 
       &:active, &:hover {
@@ -160,7 +159,7 @@ body {
   .box {
     display: flex;
     align-items: center;
-    padding: 0 3%;
+    padding: 3%;
     background: rgba(255, 255, 255, 0.64);
     box-shadow: inset 0 4px 3px rgba(0, 0, 0, 0.25);
     border-radius: 40px;
@@ -186,6 +185,8 @@ body {
     align-items: center;
     padding: 10px 10px;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 
     &:active {
       box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
@@ -193,6 +194,11 @@ body {
 
     &:active, &:hover {
       background: rgba(124, 197, 197, 0.64);
+
+      .button-image {
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25) );
+
+      }
 
       .button-text {
         color: white;
@@ -202,6 +208,7 @@ body {
 
     .button-text {
       margin: 0 auto;
+      user-select: none;
     }
 
     .button-image {
@@ -220,6 +227,49 @@ body {
   }
 
 }
+
+#waiting-heart-container {
+
+  display: flex;
+  margin-top: 8%;
+  justify-content: center;
+
+  #waiting-heart {
+    display: flex;
+
+    img {
+      height: 100%;
+      animation: heartbeat 3s infinite;
+    }
+
+  }
+
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(.75);
+  }
+  20% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(.75);
+  }
+  60% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(.75);
+  }
+  100% {
+    transform: scale(.75);
+  }
+
+}
+
+$cr: 60px;
+$heartMargin: $cr / 6;
 
 #heart-container {
   position: absolute;
@@ -299,17 +349,17 @@ body {
 
   @keyframes join {
     20% {
-      bottom: 40%;
+      bottom: 30%;
     }
     100% {
-      bottom: 40%;
+      bottom: 30%;
       left: 0;
     }
   }
 
   @keyframes split {
     0% {
-      bottom: 40%;
+      bottom: 30%;
       left: 0;
     }
     100% {
@@ -319,7 +369,7 @@ body {
 
   @keyframes toTheSky {
     0% {
-      bottom: 40%;
+      bottom: 30%;
       left: 0;
     }
     100% {
