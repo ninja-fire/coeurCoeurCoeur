@@ -185,6 +185,8 @@ body {
     align-items: center;
     padding: 10px 10px;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 
     &:active {
       box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);

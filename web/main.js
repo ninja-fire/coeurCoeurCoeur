@@ -152,7 +152,7 @@ function copyLink(notify){
 
 function displayShare(){
   if(navigator.share){
-    document.getElementById('share-button').style.display = 'initial';
+    document.getElementById('share-button').style.display = 'flex';
     shareButton.addEventListener('click', async () => {
       try {
         await navigator.share({
