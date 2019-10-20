@@ -171,6 +171,9 @@ function displayShare(){
 
 async function start(){
 
+  const notify = new Notify();
+  await notify.init();
+
   const res = await fetch(`${Config.apiUrl}/ready`, {
     method: 'post',
     headers: {
@@ -191,8 +194,6 @@ async function start(){
 
   checkStatus();
 
-  const notify = new Notify();
-  await notify.init();
   copyLink(notify);
   displayShare();
 

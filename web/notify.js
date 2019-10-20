@@ -30,15 +30,19 @@ export default class Notify {
 
   async init(){
 
-    if (!window.PushManager || !navigator.serviceWorker || !Notification) {
+    if(navigator.serviceWorker){
+
+      this.registration = await this.registerServiceWorker();
+
+    }
+
+    if(!Notification){
 
       this.notifyContainer.style.display = 'flex';
       this.notifyBtn.classList.add('disabled');
       return console.error('Notification not supported');
 
     }
-
-    this.registration = await this.registerServiceWorker();
 
     if (Notification.permission === 'denied') {
 
@@ -99,7 +103,7 @@ export default class Notify {
 
   async send({ title = 'Coeur coeur coeur', body = '' }){
 
-    if(this.workerLoaded && this.registration && this.permissionGranted){
+    if(this.workerLoaded && this.permissionGranted){
 
       await this.registration.showNotification(title, { body });
 
@@ -112,6 +116,12 @@ export default class Notify {
   }
 
   async subscribe(){
+
+    if(!this.workerLoaded){
+
+      return false;
+
+    }
 
     const existingSubscription = await this.registration.pushManager.getSubscription();
 
