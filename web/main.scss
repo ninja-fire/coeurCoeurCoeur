@@ -83,29 +83,24 @@ body {
 
     div {
       margin: 2%;
+      display: flex;
     }
 
-    #copy-container{
+    #copy-button{
 
-      display: flex;
+      color: #F6D067;
+      .button-text {
+        padding-left: 10px;
+      }
 
-      #copy-button{
+      .button-image {
+        background-image: url("assets/copylink.svg");
+      }
 
-        color: #F6D067;
-        .button-text {
-          padding-left: 10px;
-        }
+      &:active, &:hover {
 
         .button-image {
-          background-image: url("assets/copylink.svg");
-        }
-
-        &:active, &:hover {
-
-          .button-image {
-            background-image: url("assets/copylink-active.svg");
-          }
-
+          background-image: url("assets/copylink-active.svg");
         }
 
       }
