@@ -123,15 +123,14 @@ function debug(resContent){
 
 function copyLink(notify){
 
-  const copyBtn = document.getElementById('copy');
+  const copyBtn = document.getElementById('copy-button');
+  const copyBtnText = document.querySelector('#copy-button .button-text');
+
   let timeOutCopyLink = null;
   copyBtn.addEventListener('click', async () => {
 
     await navigator.clipboard.writeText(url);
-    copyBtn.innerText = 'Link copied';
-    copyBtn.classList.add('light-green');
-    copyBtn.classList.remove('blue-grey');
-    copyBtn.classList.remove('lighten-4');
+    copyBtnText.innerText = 'Link copied';
 
     await notify.send({ body: 'text copied' });
 
@@ -143,10 +142,7 @@ function copyLink(notify){
 
     timeOutCopyLink = setTimeout(() => {
 
-      copyBtn.innerText = 'Copy link';
-      copyBtn.classList.add('blue-grey');
-      copyBtn.classList.add('lighten-4');
-      copyBtn.classList.remove('light-green');
+      copyBtnText.innerText = 'Copy link';
 
     }, 1000);
 
