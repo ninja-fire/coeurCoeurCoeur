@@ -56,7 +56,7 @@ body {
 
   #link-container {
 
-    bottom: 10%;
+    bottom: 6%;
     position: absolute;
     width: 100%;
     display: flex;
@@ -144,6 +144,11 @@ body {
     display: flex;
     align-items: center;
     padding: 10px 10px;
+    cursor: pointer;
+
+    &:active{
+      box-shadow: none;
+    }
   }
 
   .text {
