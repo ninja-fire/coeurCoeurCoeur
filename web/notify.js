@@ -24,7 +24,7 @@ export default class Notify {
     this.workerLoaded = false;
     this.registration = null;
     this.notifyContainer = document.getElementById('notify-container');
-    this.notifyBtn = document.getElementById('notify');
+    this.notifyBtn = document.getElementById('notify-button');
 
   }
 

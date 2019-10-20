@@ -1,7 +1,5 @@
 import './main.scss';
 import Config from './config';
-import 'materialize-css/dist/css/materialize.min.css';
-import 'materialize-css/dist/js/materialize.min';
 import Notify from './notify';
 import Connector from './connectors';
 
@@ -114,22 +112,25 @@ function checkStatus(){
 
 function debug(resContent){
 
-  const loversContainers = document.getElementById('debug');
-  loversContainers.textContent = JSON.stringify(resContent);
+  if(Config.env !== 'production') {
+
+    const loversContainers = document.getElementById('debug');
+    loversContainers.textContent = JSON.stringify(resContent);
+
+  }
 
 }
 
 function copyLink(notify){
 
-  const copyBtn = document.getElementById('copy');
+  const copyBtn = document.getElementById('copy-button');
+  const copyBtnText = document.querySelector('#copy-button .button-text');
+
   let timeOutCopyLink = null;
   copyBtn.addEventListener('click', async () => {
 
     await navigator.clipboard.writeText(url);
-    copyBtn.innerText = 'Link copied';
-    copyBtn.classList.add('light-green');
-    copyBtn.classList.remove('blue-grey');
-    copyBtn.classList.remove('lighten-4');
+    copyBtnText.innerText = 'Link copied';
 
     await notify.send({ body: 'text copied' });
 
@@ -141,10 +142,7 @@ function copyLink(notify){
 
     timeOutCopyLink = setTimeout(() => {
 
-      copyBtn.innerText = 'Copy link';
-      copyBtn.classList.add('blue-grey');
-      copyBtn.classList.add('lighten-4');
-      copyBtn.classList.remove('light-green');
+      copyBtnText.innerText = 'Copy link';
 
     }, 1000);
 
@@ -154,17 +152,17 @@ function copyLink(notify){
 
 function displayShare(){
   if(navigator.share){
-    document.getElementById("share-button").style.display = "initial";
-    shareButton.addEventListener("click", async () => {
+    document.getElementById('share-button').style.display = 'flex';
+    shareButton.addEventListener('click', async () => {
       try {
         await navigator.share({
-          title: 'title',
+          title: 'Coeur coeur coeur',
           text: 'share love with',
           url: '',
         });
-        console.log("Data was shared successfully");
+        console.log('Data was shared successfully');
       } catch (err) {
-        console.error("Share failed:", err.message);
+        console.error('Share failed:', err.message);
       }
     });
   }

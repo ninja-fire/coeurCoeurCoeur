@@ -5,44 +5,61 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Coeur coeur coeur</title>
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="shortcut icon" href="assets/favicon.png">
+  <!--Import Google Icon Font-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700">
 </head>
+
 <body>
-<div id="hear-container">
+<div id="heart-container">
   <div class="glow"></div>
   <div class="half-heart"></div>
   <div class="glow two"></div>
   <div class="half-heart two"></div>
   <div class="half-heart reflection two"></div>
 </div>
-<div id="main-container">
+<main id="main-container">
   <div id="debug"></div>
-  <div id="info-container">
-    Beaucoup d’amour est actuelllement en cours de distribution. Prépare toi à en envoyer à ton tour !
+  <div id="info-container" class="box">
+    <img src="assets/wait-icon.svg" alt="wait-icon">
+    <p class="info-text">
+      Beaucoup d’amour est actuellement en cours de distribution. Prépare toi à en envoyer à ton tour !
+    </p>
   </div>
   <div id="notify-container">
-    <div>
-      <a id="notify" class="waves-effect btn blue-grey lighten-4 blue-grey-text text-darken-4">Notify</a>
+    <p>Active les notifications pour être informé lorsque tu recevras le coeur !</p>
+    <a id="notify-button" class="button text">
+      <span class="button-text">Notify</span>
+      <span class="button-image"></span>
+    </a>
+  </div>
+  <div id="waiting-heart-container">
+    <div id="waiting-heart">
+      <img src="assets/waiting-heart.svg" alt="waiting heart">
     </div>
   </div>
   <div id="link-container">
     <div id="copy-container">
-      <a id="copy" class="waves-effect btn blue-grey lighten-4 blue-grey-text text-darken-4">Copy link</a>
+      <a id="copy-button" class="button text">
+        <span class="button-image"></span>
+        <span class="button-text">Copy link</span>
+      </a>
     </div>
-    <div id="share-button">
-      <button> BOUTON </button>
+    <div id="share-button-container">
+      <a id="share-button" class="button text">
+        <span class="button-text">Share love</span>
+        <span class="button-image"></span>
+      </a>
     </div>
   </div>
-  <div id="source-container">
+  <footer id="footer-container">
     <div id="github-icon">
       <a href="https://github.com/ninja-fire/coeurCoeurCoeur" target="_blank">
         <img src="assets/github-logo.svg" alt="github link">
       </a>
     </div>
-  </div>
-</div>
+  </footer>
+</main>
 <script src="./index.js"></script>
 </body>
 </html>
