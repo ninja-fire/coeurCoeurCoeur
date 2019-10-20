@@ -152,17 +152,17 @@ function copyLink(notify){
 
 function displayShare(){
   if(navigator.share){
-    document.getElementById("share-button").style.display = "initial";
-    shareButton.addEventListener("click", async () => {
+    document.getElementById('share-button').style.display = 'initial';
+    shareButton.addEventListener('click', async () => {
       try {
         await navigator.share({
-          title: 'title',
+          title: 'Coeur coeur coeur',
           text: 'share love with',
           url: '',
         });
-        console.log("Data was shared successfully");
+        console.log('Data was shared successfully');
       } catch (err) {
-        console.error("Share failed:", err.message);
+        console.error('Share failed:', err.message);
       }
     });
   }
