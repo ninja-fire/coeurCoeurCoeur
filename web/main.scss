@@ -6,7 +6,6 @@ body {
 }
 
 #main-container {
-
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -21,7 +20,6 @@ body {
   }
 
   #info-container {
-
     margin: 5% 10% 0 10%;
     display: flex;
     align-items: center;
@@ -72,8 +70,25 @@ body {
 
   }
 
-  #link-container {
+  #waiting-heart-container {
 
+    display: flex;
+    margin-top: 8%;
+    justify-content: center;
+
+    #waiting-heart {
+      display: flex;
+
+      img {
+        height: 100%;
+        animation: heartbeat 3s infinite;
+      }
+
+    }
+
+  }
+
+  #link-container {
     bottom: 6%;
     position: absolute;
     width: 100%;
@@ -87,8 +102,8 @@ body {
     }
 
     #copy-button{
-
       color: #F6D067;
+
       .button-text {
         padding-left: 10px;
       }
@@ -193,7 +208,7 @@ body {
     }
 
     &:active, &:hover {
-      background: rgba(124, 197, 197, 0.64);
+      background: rgb(124, 197, 197);
 
       .button-image {
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25) );
@@ -228,24 +243,6 @@ body {
 
 }
 
-#waiting-heart-container {
-
-  display: flex;
-  margin-top: 8%;
-  justify-content: center;
-
-  #waiting-heart {
-    display: flex;
-
-    img {
-      height: 100%;
-      animation: heartbeat 3s infinite;
-    }
-
-  }
-
-}
-
 @keyframes heartbeat {
   0% {
     transform: scale(.75);
@@ -272,15 +269,10 @@ $cr: 60px;
 $heartMargin: $cr / 6;
 
 #heart-container {
+  display: flex;
   position: absolute;
-  margin: auto;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
   height: 100%;
-  overflow: hidden;
-  box-shadow: #111111 0 20px 35px -25px inset;
+  width: 100%;
 
   div {
     z-index: 1;
@@ -309,8 +301,6 @@ $heartMargin: $cr / 6;
     right: 0;
     width: $cr;
     height: $cr;
-    background-color: #C72E42;
-    border-radius: 50%;
     transform: translate(-50%);
   }
 
@@ -321,14 +311,10 @@ $heartMargin: $cr / 6;
     right: 0;
     width: 0;
     height: 0;
-    border: $cr / 2 solid transparent;
-    border-left: 0;
-    border-right: $cr * 0.7 solid #C72E42;
   }
 
   .reflection {
     left: calc(100% + 40px);
-    transform: rotateY(180deg) translate(-50%);
   }
 
   .join {
